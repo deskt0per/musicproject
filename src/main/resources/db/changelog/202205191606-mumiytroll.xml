@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.9.xsd">
+    <changeSet id="1" author="kds">
+        <sql splitStatements="false">
+            <![CDATA[
+            do
+            $$
+    DECLARE
+            album_id  bigint;
+            artist_id bigint;
+
+            BEGIN
+            select id into artist_id from artist where name = 'Мумий Тролль';
+            album_id = 7;
+
+            insert into track(name, album_id, artist_id, length, url)
+            values ('Утекай', album_id, artist_id, 2 * 60 + 18,
+                    'https://cdn2.deliciouspears.com/load/1543544526/Mumijj_Troll_-_Utekajj_(musmore.com).mp3');
+
+            insert into track(name, album_id, artist_id, length, url)
+            values ('Скорость', album_id, artist_id, 3 * 60 + 52,
+                    'https://ruo.morsmusic.org/load/1810741574/Mumijj_Troll_-_Skorost_(musmore.com).mp3');
+            END
+$$
+            ]]>
+        </sql>
+    </changeSet>
+</databaseChangeLog>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.9.xsd">
+    <changeSet id="1" author="kds">
+        <sql splitStatements="false">
+            <![CDATA[
+            do
+            $$
+    DECLARE
+            album_id  bigint;
+            artist_id bigint;
+
+            BEGIN
+            select id into artist_id from artist where name = 'И.С. Бах';
+            album_id = 13;
+
+            insert into track(name, album_id, artist_id, length, url)
+            values ('Toccata', album_id, artist_id, 2 * 60 + 46,
+                    'https://ruo.morsmusic.org/load/428113696/Paul_Mauriat_Iogann_Sebastyan_Bakh_-_Toccata_(musmore.com).mp3');
+
+            insert into track(name, album_id, artist_id, length, url)
+            values ('The Cello Song', album_id, artist_id, 3 * 60 + 16,
+                    'https://ruo.morsmusic.org/load/49840427/The_Piano_Guys_Iogann_Sebastyan_Bakh_-_The_Cello_Song_(musmore.com).mp3');
+            END
+$$
+            ]]>
+        </sql>
+    </changeSet>
+</databaseChangeLog>

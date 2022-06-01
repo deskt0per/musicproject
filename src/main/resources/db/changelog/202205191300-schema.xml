@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.9.xsd">
+    <changeSet id="1" author="kds">
+        <sql>
+            create table users
+            (
+                id       bigserial    not null
+                    constraint users_pkey
+                        primary key,
+                enabled  boolean      not null,
+                password varchar(100) not null,
+                username varchar(50)  not null
+                    constraint uk_r43af9ap4edm43mmtq01oddj6
+                        unique
+            );
+
+            create table authorities
+            (
+                id        bigserial
+                    constraint authorities_pkey
+                        primary key,
+                authority varchar(50) not null,
+                username  varchar(50) not null
+                    constraint fkk91upmbueyim93v469wj7b2qh
+                        references users (username)
+            );
+
+            create table artist
+            (
+                id          bigserial    not null
+                    constraint artist_pkey
+                        primary key,
+                created_at  timestamp    not null default now(),
+                name        varchar(128) not null,
+                description varchar
+            );
+
+            create table album
+            (
+                id          bigserial    not null
+                    constraint album_pkey
+                        primary key,
+                name        varchar(128) not null,
+                artist_id   bigint
+                    constraint fkmwc4fyyxb6tfi0qba26gcf8s1
+                        references artist,
+                description varchar,
+                year        integer
+            );
+
+            create table track
+            (
+                id         bigserial    not null
+                    constraint track_pkey
+                        primary key,
+                created_at timestamp    not null default now(),
+                name       varchar(128) not null,
+                album_id   bigint
+                    constraint fkaxm9pbgk7ptorfyk3o6911q05
+                        references album,
+                artist_id  bigint
+                    constraint fkaxm9pbgk7ptorfyk3o6911q06
+                        references artist,
+                url        varchar,
+                length integer
+            );
+
+            create table tag
+            (
+                id   bigserial    not null
+                    constraint tag_pkey primary key,
+                name varchar(128) not null
+            );
+
+            create table liked_object
+            (
+                id          bigserial not null
+                    constraint liked_object_pkey
+                        primary key,
+                object_id   bigint,
+                object_type varchar(255),
+                created_at  timestamp not null default now(),
+                user_id     bigint
+                    constraint fk8ged7m64q5oy5en8d22uejpi4
+                        references users
+            );
+            create index liked_object_object_id_user_id_index
+                on liked_object (object_id, user_id);
+
+            create table hated_object
+            (
+                id          bigserial not null
+                    constraint hated_object_pkey
+                        primary key,
+                object_id   bigint,
+                object_type varchar(255),
+                created_at  timestamp not null default now(),
+                user_id     bigint
+                    constraint fk8ged7m64q5oy5en8d22uejpi5
+                        references users
+            );
+            create index hated_object_object_id_user_id_index
+                on hated_object (object_id, user_id);
+
+            create table tagged_object
+            (
+                id          bigserial not null
+                    constraint tagged_object_pkey
+                        primary key,
+                object_id   bigint,
+                object_type varchar(255),
+                tag_id      bigint
+                    constraint fkbjvha4u01mvd1647luylwpe03
+                        references tag
+            );
+            create index tagged_object_object_id_index
+                on tagged_object (object_id);
+        </sql>
+    </changeSet>
+</databaseChangeLog>

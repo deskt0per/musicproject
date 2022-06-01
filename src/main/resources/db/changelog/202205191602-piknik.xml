@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.9.xsd">
+    <changeSet id="1" author="kds">
+        <sql splitStatements="false">
+            <![CDATA[
+            do
+            $$
+    DECLARE
+            album_id  bigint;
+            artist_id bigint;
+
+            BEGIN
+            select id into artist_id from artist where name = 'Пикник';
+            album_id = 3;
+
+            insert into track(name, album_id, artist_id, length, url)
+            values ('У шамана три руки', album_id, artist_id, 3 * 60 + 26,
+                    'https://cdn2.deliciouspears.com/load/332890516/Piknik_-_U_shamana_tri_ruki_(musmore.com).mp3');
+
+            insert into track(name, album_id, artist_id, length, url)
+            values ('Королевство Кривых', album_id, artist_id, 4 * 60 + 45,
+                    'https://cdn2.deliciouspears.com/load/2035571028/Piknik_-_Korolevstvo_Krivykh_(musmore.com).mp3');
+            END
+$$
+            ]]>
+        </sql>
+    </changeSet>
+</databaseChangeLog>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.9.xsd">
+    <changeSet id="1" author="kds">
+        <sql splitStatements="false">
+            <![CDATA[
+            do
+            $$
+    DECLARE
+            album_id  bigint;
+            artist_id bigint;
+
+            BEGIN
+            select id into artist_id from artist where name = 'Амадеус Моцарт';
+            album_id = 14;
+
+            insert into track(name, album_id, artist_id, length, url)
+            values ('Serenade No. 13 in G ''Eine kleine Nachtmusik'' K525: I. Allegro', album_id, artist_id, 5 * 60 + 51,
+                    'https://ruo.morsmusic.org/load/1134721036/Sir_Neville_Marriner_Volfgang_Amadejj_Mocart_-_Serenade_No_13_in_G_Eine_kleine_Nachtmusik_K525_I_Allegro_(musmore.com).mp3');
+
+            insert into track(name, album_id, artist_id, length, url)
+            values ('Serenade No.13 in G major, K.525 "Eine kleine Nachtmusik": IV. Rondo (Allegro)', album_id, artist_id, 3 * 60 + 22,
+                    'https://ruo.morsmusic.org/load/1521776564/Volfgang_Amadejj_Mocart_Berlin_Philharmonic_Orchestra_-_Serenade_No13_in_G_major_K525_Eine_kleine_Nachtmusik_IV_Rondo_Allegro_(musmore.com).mp3');
+            END
+$$
+            ]]>
+        </sql>
+    </changeSet>
+</databaseChangeLog>

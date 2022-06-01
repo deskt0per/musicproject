@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.9.xsd">
+    <changeSet id="1" author="kds">
+        <sql splitStatements="false">
+            <![CDATA[
+            do
+            $$
+    DECLARE
+            album_id  bigint;
+            artist_id bigint;
+
+            BEGIN
+            select id into artist_id from artist where name = 'Кипелов';
+            album_id = 6;
+
+            insert into track(name, album_id, artist_id, length, url)
+            values ('Я здесь', album_id, artist_id, 5 * 60 + 43,
+                    'https://cdn1.deliciouspears.com/load/235045201/Kipelov_-_YA_zdes_(musmore.com).mp3');
+
+            insert into track(name, album_id, artist_id, length, url)
+            values ('Реки времён', album_id, artist_id, 4 * 60 + 56,
+                    'https://ruo.morsmusic.org/load/641683471/Kipelov_-_Reki_Vremjon_(musmore.com).mp3');
+            END
+$$
+            ]]>
+        </sql>
+    </changeSet>
+</databaseChangeLog>

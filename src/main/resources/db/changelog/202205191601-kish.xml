@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.9.xsd">
+    <changeSet id="1" author="kds">
+        <sql splitStatements="false">
+            <![CDATA[
+do
+$$
+    DECLARE
+            album_id  bigint;
+            artist_id bigint;
+
+            BEGIN
+            select id
+            into artist_id
+            from artist
+            where name = 'Король и Шут';
+            album_id = 1;
+
+            insert into track(name, album_id, artist_id, length, url)
+            values ('Смельчак и ветер', album_id, artist_id, 3 * 60,
+                    'https://cdn1.deliciouspears.com/load/606149013/Korol_i_SHut_-_Smelchak_i_veter_(musmore.com).mp3');
+
+            insert into track(name, album_id, artist_id, length, url)
+            values ('Проказник Скоморох', album_id, artist_id, 60 + 51,
+                    'https://cdn2.deliciouspears.com/load/1114516884/Korol_i_SHut_-_Prokaznik_Skomorokh_(musmore.com).mp3');
+
+            insert into track(name, album_id, artist_id, length, url)
+            values ('Верная жена', album_id, artist_id, 2 * 60 + 37,
+                    'https://cdn2.deliciouspears.com/load/900340859/Korol_i_SHut_-_Vernaya_zhena_(musmore.com).mp3');
+
+            insert into track(name, album_id, artist_id, length, url)
+            values ('Садовник', album_id, artist_id, 3 * 60 + 41,
+                    'https://cdn1.deliciouspears.com/load/816480953/Korol_i_SHut_-_Sadovnik_(musmore.com).mp3');
+
+            insert into track(name, album_id, artist_id, length, url)
+            values ('Блуждают тени', album_id, artist_id, 2 * 60 + 11,
+                    'https://cdn1.deliciouspears.com/load/1853076261/Korol_i_SHut_-_Bluzhdayut_teni_(musmore.com).mp3');
+
+            album_id = 2;
+
+            insert into track(name, album_id, artist_id, length, url)
+            values ('Мастер приглашает в гости', album_id, artist_id, 3 * 60 + 17,
+                    'https://ruo.morsmusic.org/load/609082339/Korol_i_SHut_-_Master_priglashaet_v_gosti_(musmore.com).mp3');
+
+            insert into track(name, album_id, artist_id, length, url)
+            values ('Воспоминания о былой любви', album_id, artist_id, 3 * 60 + 17,
+                    'https://cdn1.deliciouspears.com/load/1979329029/Korol_i_SHut_-_Vospominaniya_o_bylojj_lyubvi_(musmore.com).mp3');
+
+            END
+$$
+            ]]>
+        </sql>
+    </changeSet>
+</databaseChangeLog>

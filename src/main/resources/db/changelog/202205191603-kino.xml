@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.9.xsd">
+    <changeSet id="1" author="kds">
+        <sql splitStatements="false">
+            <![CDATA[
+            do
+            $$
+    DECLARE
+            album_id  bigint;
+            artist_id bigint;
+
+            BEGIN
+            select id into artist_id from artist where name = 'Кино';
+            album_id = 4;
+
+            insert into track(name, album_id, artist_id, length, url)
+            values ('Красно-жёлтые дни', album_id, artist_id, 5 * 60 + 50,
+                    'https://ruo.morsmusic.org/load/1796699641/KINO_-_Krasno-zhjoltye_dni_(musmore.com).mp3');
+
+            insert into track(name, album_id, artist_id, length, url)
+            values ('Кукушка', album_id, artist_id, 6 * 60 + 40,
+                    'https://cdn1.deliciouspears.com/load/2058892371/KINO_-_Kukushka_(musmore.com).mp3');
+            END
+$$
+            ]]>
+        </sql>
+    </changeSet>
+</databaseChangeLog>

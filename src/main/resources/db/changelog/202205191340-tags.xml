@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.9.xsd">
+    <changeSet id="1" author="kds">
+        <sql>
+            <![CDATA[
+            insert into tag(id, name)
+            values(1, 'Панк');
+
+            insert into tag(id, name)
+            values(2, 'Рок');
+
+            insert into tag(id, name)
+            values(3, 'Метал');
+
+            insert into tag(id, name)
+            values(4, 'Поп');
+
+            insert into tag(id, name)
+            values(5, 'Классика');
+            ]]>
+        </sql>
+    </changeSet>
+</databaseChangeLog>

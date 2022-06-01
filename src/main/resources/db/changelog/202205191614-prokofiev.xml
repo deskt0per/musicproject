@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.9.xsd">
+    <changeSet id="1" author="kds">
+        <sql splitStatements="false">
+            <![CDATA[
+            do
+            $$
+    DECLARE
+            album_id  bigint;
+            artist_id bigint;
+
+            BEGIN
+            select id into artist_id from artist where name = 'Сергей Прокофьев';
+            album_id = 15;
+
+            insert into track(name, album_id, artist_id, length, url)
+            values ('Piano Sonata No. 8 in B Flat Major, Op. 84 - II. Andante sognando', album_id, artist_id, 4 * 60 + 20,
+                    'https://ruo.morsmusic.org/load/664059716/Daniil_Trifonov_Sergejj_Sergeevich_Prokofev_-_Prokofiev_Piano_Sonata_No_8_in_B_Flat_Major_Op_84_-_II_Andante_sognando_(musmore.com).mp3');
+
+            insert into track(name, album_id, artist_id, length, url)
+            values ('Марш бармалея', album_id, artist_id,  60 + 37,
+                    'https://ruo.morsmusic.org/load/58204427/Lyubov_Timoveeva_Sergejj_Sergeevich_Prokofev_-_Marsh_barmaleya_(musmore.com).mp3');
+            END
+$$
+            ]]>
+        </sql>
+    </changeSet>
+</databaseChangeLog>

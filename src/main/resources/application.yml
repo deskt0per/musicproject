@@ -1,0 +1,27 @@
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/music
+    username: music
+    password: music
+    hikari:
+      auto-commit: false
+  jpa:
+    hibernate:
+      ddl-auto: validate
+      properties:
+        hibernate.format_sql: true
+
+    database-platform: org.hibernate.dialect.PostgreSQL10Dialect
+    generate-ddl: false
+    show-sql: false
+
+  liquibase:
+    change-log: classpath:/db/changelog/db.changelog-master.xml
+
+vaadin:
+  servlet:
+    productionMode: true
+
+recommend-like-limit: 3
+playlist-limit: 25

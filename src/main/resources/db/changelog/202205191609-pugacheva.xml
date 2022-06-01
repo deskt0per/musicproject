@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.9.xsd">
+    <changeSet id="1" author="kds">
+        <sql splitStatements="false">
+            <![CDATA[
+            do
+            $$
+    DECLARE
+            album_id  bigint;
+            artist_id bigint;
+
+            BEGIN
+            select id into artist_id from artist where name = 'Алла Пугачёва';
+            album_id = 10;
+
+            insert into track(name, album_id, artist_id, length, url)
+            values ('Речной трамвайчик', album_id, artist_id, 3 * 60 + 19,
+                    'https://ruo.morsmusic.org/load/745669557/Alla_Pugachjova_-_Rechnojj_tramvajjchik_(musmore.com).mp3');
+
+            insert into track(name, album_id, artist_id, length, url)
+            values ('Непогода', album_id, artist_id, 4 * 60 + 47,
+                    'https://ruo.morsmusic.org/load/424636463/Alla_Pugachjova_-_Nepogoda_(musmore.com).mp3');
+            END
+$$
+            ]]>
+        </sql>
+    </changeSet>
+</databaseChangeLog>
